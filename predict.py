@@ -26,7 +26,7 @@ for result in results:
                 break
     
     # Determine label and color
-    label = "Defect" if is_defect else "Perfect
+    label = "Defect" if is_defect else "Perfect"
     color = (0, 0, 255) if is_defect else (0, 255, 0) # Red for Defect, Green for Non-Defect
     
     # Get the plotted image (numpy array)
