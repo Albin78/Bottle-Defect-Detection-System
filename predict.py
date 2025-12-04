@@ -23,6 +23,7 @@ for result in results:
         for cls in result.boxes.cls:
             if int(cls) in DEFECT_CLASSES:
                 is_defect = True
+                print("Defect detected:", int(cls))
                 break
     
     # Determine label and color
