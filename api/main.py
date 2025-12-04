@@ -11,7 +11,7 @@ app = FastAPI()
 # --- Pydantic Models ---
 
 class Detection(BaseModel):
-    class_name: str = Field(..., alias="class")
+    class_name: str
     class_id: int
     confidence: float
 

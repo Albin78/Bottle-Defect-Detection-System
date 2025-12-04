@@ -41,7 +41,7 @@ def detect_defect(image_path: str, save_output: bool = True):
         class_name = result.names[cls]
 
         detections.append({
-            "class": class_name,
+            "class_name": class_name,
             "class_id": cls,
             "confidence": round(conf, 3)
         })
