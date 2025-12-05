@@ -32,3 +32,5 @@ runs/
 extracted/
 ignore/
 images/
+*.zip
+*.pt

@@ -4,3 +4,4 @@ uvicorn
 python-dotenv
 ultralytics
 python-multipart
+opencv-python-headless
