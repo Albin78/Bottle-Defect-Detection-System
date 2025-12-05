@@ -1,11 +1,34 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-*
-\extracted
-\ignore
-\images
-\results
-\runs
-\temp_uploads
-\yolovenv
-*.pt
-\__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+yolovenv/
+
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+
+# Project specific
+temp_uploads/
+results/
+runs/
+extracted/
+ignore/
+images/
