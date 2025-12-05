@@ -26,7 +26,7 @@ def detect_defect(image_path: str, save_output: bool = True):
     # stream=False (default) returns a list of Results objects
     results = model.predict(image_path, 
                             save=save_output,
-                            conf=0.25, # Lowered confidence to catch more detections
+                            conf=0.4, # Lowered confidence to catch more detections
                             imgsz=640,
                             stream=False 
             )
@@ -34,6 +34,9 @@ def detect_defect(image_path: str, save_output: bool = True):
     result = results[0]
     detections = []
     is_defect = False
+
+    max_defect_conf = 0.0
+    max_normal_conf = 0.0
 
     for box in result.boxes:
         cls = int(box.cls[0])
@@ -48,9 +51,19 @@ def detect_defect(image_path: str, save_output: bool = True):
 
         if cls in DEFECT_CLASSES:
             is_defect = True
+            if conf > max_defect_conf:
+                max_defect_conf = conf
+        else:
+            if conf > max_normal_conf:
+                max_normal_conf = conf
             
-    # Determine label
-    label = "Defect" if is_defect else "Perfect"
+    # Determine label and overall confidence
+    if is_defect:
+        label = "Defect"
+        confidence = max_defect_conf
+    else:
+        label = "Perfect"
+        confidence = max_normal_conf if max_normal_conf > 0 else 0.0
     
     output_path = ""
     if save_output:
@@ -62,10 +75,11 @@ def detect_defect(image_path: str, save_output: bool = True):
         cv2.imwrite(output_path, annotated)
 
     return {
-        "is_defect": is_defect,
+        # "is_defect": is_defect,
         "label": label,
+        "confidence": round(confidence, 3),
         "detections": detections if detections else None,
-        "image_path": output_path
+        # "image_path": output_path
     }
 
 

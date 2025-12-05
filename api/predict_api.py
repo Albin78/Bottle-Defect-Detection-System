@@ -16,11 +16,10 @@ class Detection(BaseModel):
     confidence: float
 
 class PredictionResponse(BaseModel):
-    filename: str
-    is_defect: bool
+    # filename: str
     label: str
-    detections: Optional[List[Detection]] = None
-    processed_image_path: str
+    confidence: float
+    # detections: Optional[List[Detection]] = None
 
 # --- Endpoints ---
 
@@ -46,11 +45,12 @@ async def predict(file: UploadFile = File(...)):
         # Construct response
         # Map dictionary keys to Pydantic model
         response = PredictionResponse(
-            filename=file.filename,
-            is_defect=result["is_defect"],
+            # filename=file.filename,
+            # is_defect=result["is_defect"],
             label=result["label"],
-            detections=result["detections"],
-            processed_image_path=result["image_path"]
+            confidence=result["confidence"],
+            # detections=result["detections"],
+            # processed_image_path=result["image_path"]
         )
         
         return response
