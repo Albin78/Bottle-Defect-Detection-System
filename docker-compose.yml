@@ -1,0 +1,14 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: albin123docker/bottle_defect:latest
+    container_name: defect-bottle-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
